@@ -32,5 +32,5 @@ possible_combinations = [i for i, j in enumerate(L3) if j == 24]
 for i in possible_combinations:
     print(all2[i])
 
-print(L3.count(24)) # find out how many 24-cards are there -> 1342
+print(L3.count(24)) # find out how many 24-cards are there 
 
