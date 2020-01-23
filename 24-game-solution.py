@@ -6,10 +6,10 @@ _func = [operator.add, operator.sub, operator.mul]
 L1 = [i for i in range(2, 10)]
 L2 = [i for i in range(2, 10)]
 
-# can you store the result as a dictionary?? instead of a list?
-## then you could retrieve the functions easier
-
 def applyToEach(L1, L2):
+    """
+    get all possible values through operations between L1 and L2
+    """
     all = []
     for f in _func:
         for i in L1:
@@ -18,9 +18,12 @@ def applyToEach(L1, L2):
              all.append(temp)
     return all
 
-L3 = applyToEach(L1, L2) # can retrieve L3 by applyToEach(L)[0]
+L3 = applyToEach(L1, L2) 
 
 def applyMore(L3, L1):
+    """
+    get all possible values through operations between L3 and L1
+    """
     all = []
     for f in _func:
         for i in L3:
@@ -33,6 +36,9 @@ L4 = applyMore(L3, L1) # call the function for the seocnd time between new list 
 
 
 def applyMoreMore(L4, L1):
+     """
+    get all possible values through operations between L4 and L1
+    """
     all = []
     for f in _func:
         for i in L4:
@@ -46,7 +52,8 @@ L5 = applyMoreMore(L4, L1) # call the function for the final time
 # find out where the results == 24
 possible_combinations = [i for i in L5 if i[9] == 24]
 
-print(len(possible_combinations))
+print(len(possible_combinations)) # chech how many possible 24-cards are there
+
 
 ## now the game starts
 
