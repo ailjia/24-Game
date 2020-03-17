@@ -68,8 +68,6 @@ class number_set():
             else:
                 print(answer)
                 break
-            #if trial > 3:
-             #   break
 
 def generate_answers():
     list_all_num = list(itertools.combinations_with_replacement(range(1, 10), 4))
