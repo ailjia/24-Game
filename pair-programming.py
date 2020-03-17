@@ -1,3 +1,9 @@
+'''
+
+24-game gives the player 4 numbers, and ask for player to use operations +, -, * on these numbers
+in a way that the result equals to 24
+
+'''
 import operator
 import random
 import itertools
@@ -42,16 +48,28 @@ class number_set():
         return self.result3
 
     def check_answer(self, result3):
-        if self.result3 != 24:
+        if self.result3 == 24:
             print('Correct')
 
+        trial = 0
         while self.result3 != 24:
             print("The current answer is {}. Enter 'T' to try again. Enter 'N' to shower answer".format(self.result3))
-            while input() == 'T':
-                self.user_input()
-                print("The current answer is {}. Enter 'T' to try again. Enter 'N' to shower answer".format(self.result3))
-            if input() == 'N':
-                print('Give up')
+            choice = input()
+            if choice == 'T' and trial <= 3:
+                trial += 1
+                user_operations = self.user_input()
+                user_operations = self.split(user_operations)
+                self.operators(user_operations)
+                self.result3 = self.calculate()
+                #print("The current answer is {}. Enter 'T' to try again. Enter 'N' to shower answer".format(self.result3))
+            if choice == 'T' and trial > 3:
+                print('you have reached total number of trials')
+                print(answer)
+            else:
+                print(answer)
+                break
+            #if trial > 3:
+             #   break
 
 def generate_answers():
     list_all_num = list(itertools.combinations_with_replacement(range(1, 10), 4))
@@ -64,7 +82,7 @@ def generate_answers():
     possible_cases = []
     all_answers = []
     for i in list_all_num:
-        test = number_set(i[0], i[1], i[2], i[3])
+        test = number_set(*i)
         for j in list_all_ops:
             user_operations = j
             test.operators(user_operations)
@@ -75,21 +93,21 @@ def generate_answers():
 
     return possible_cases, all_answers
 
+if __name__ == '__main__':
+    possible_cases, all_answers = generate_answers()
 
-possible_cases, all_answers = generate_answers()
+    choice = random.choice(possible_cases)
+    answer_index = possible_cases.index(choice)
+    answer = all_answers[answer_index] # save the answer
 
-choice = random.choice(possible_cases)
-answer_index = possible_cases.index(choice)
-answer = all_answers[answer_index] # save the answer
+    test = number_set(*choice)
+    test.start_game()
 
-test = number_set(choice[0], choice[1], choice[2], choice[3])
-test.start_game()
+    user_operations = test.user_input()
+    user_operations = test.split(user_operations)
+    test.operators(user_operations)
 
-user_operations = test.user_input()
-user_operations = test.split(user_operations)
-test.operators(user_operations)
-
-result = test.calculate()
-test.check_answer(result)
+    result = test.calculate()
+    test.check_answer(result)
 
 
